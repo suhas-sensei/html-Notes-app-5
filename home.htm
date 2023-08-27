@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+        <title>S. Notes</title>
+        <link rel="icon" type="image/x-icon" href="1.png">
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+    * {
+        font-family: "Ubuntu", cursive;}
+    body{
+        margin: 0px;
+        background-image: url('2.gif');
+          background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: 100% 100%;}
+.clear {
+    clear: both;
+}
+#container {
+    margin: 280px 200px 200px 200px;
+    
+    
+}
+
+  
+#area {
+    width: 100%;
+    height: 100%;
+    font-size: 18px ;
+    font-style: bold;
+    font: "Tilt Warp", cursive;
+    color: #322a8d;
+    background-color: rgba(160, 239, 235, 0.49);
+}
+#area:focus {
+    color: #322a8d;
+    font-style: bold;
+    border: 2px solid #96c56f8f;
+    box-shadow: 0px 1px 1px #888888;
+}
+.footer {
+    width: 100%;
+    background-color: #4da044b2;
+    height: 32px;
+    position: fixed;
+    bottom: 0px;
+}
+.footer > p {
+    margin: 8px;
+    color: white;
+    font: 14px ;
+    text-align: center;
+}
+#controls {
+    margin-left: 10px;
+}
+a.button {
+    width: 15%;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #a9db80, #96c56f);
+    background: -moz-linear-gradient(top, #a9db80, #96c56f);
+    background: -ms-linear-gradient(top, #a9db80, #96c56f);
+    background: -o-linear-gradient(top, #a9db80, #96c56f);
+    background: linear-gradient(to bottom, #a9db80, #96c56f);
+    border-radius: 8px;
+    border: 1.5px solid #000000;
+    box-shadow: 0px 1px 1px #888888 inset, 1px 1px 3px #222222;
+    color: #4da044;
+    text-decoration: none;
+    text-align: center;
+    padding: 16px 32px 16px 32px;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
+}
+a.button:hover {
+    background: #4da044;
+    color: white;
+}
+a.button:active {
+    background: rgba(80, 120, 80, 1);
+}
+@media only screen and (min-width: 600px) {
+    #menu {
+        float: right;
+        display: inline-block;
+    }
+    .menuitem {
+        display: inline;
+    }
+    .menuitem + .menuitem {
+        border-left: 1px solid white;
+        margin-left: 8px;
+        padding-left: 8px;
+    }
+    #menubutton {
+        display: none;
+    }
+}
+@media only screen and (max-width: 599px) {
+    #menubutton {
+        display: inline;
+        float: right;
+    }
+    #menu {
+        position: absolute;
+        top: 48px;
+        right: 0px;
+        background: #325232;
+        padding: 16px;
+    }
+    .shownmenu {
+        display: block;
+    }
+    .hiddenmenu {
+        display: none;
+    }
+    .menuitem {
+        display: block;
+    }
+    .menuitem + .menuitem {
+        margin-top: 8px;
+    }
+}
+        </style>
+        <script>
+            window.onload = function() {
+                var home = document.getElementById('container').innerHTML;
+var controls = document.getElementById('controls').innerHTML;
+display_saved_note();
+document.getElementById('home').onclick = function() {
+    document.getElementById('container').innerHTML = home;
+    document.getElementById('controls').innerHTML = controls;
+    document.getElementById('menu').className = 'hiddenmenu';
+    display_saved_note();
+}
+    document.getElementById('menulink').onclick = function() {
+        var menu = document.getElementById('menu');
+        if(menu.className != 'shownmenu') {
+            menu.className = 'shownmenu';
+        }
+        else {
+            menu.className = 'hiddenmenu';
+        }
+    }
+}
+function check_web_storage_support() {
+    if(typeof(Storage) !== "undefined") {
+        return(true);
+    }
+    else {
+        alert("Web storage unsupported!");
+        return(false);
+    }
+}
+function display_saved_note() {
+    if(check_web_storage_support() == true) {
+        result = localStorage.getItem('note');
+    }
+    if(result === null) {
+        result = "No note saved";
+    }
+    document.getElementById('area').value = result;
+}
+function save() {
+    if(check_web_storage_support() == true) {
+        var area = document.getElementById("area");
+        if(area.value != '') {
+            localStorage.setItem("note", area.value);
+        }
+        else {
+            alert("Nothing to save");
+        }
+    }
+}
+function clear() {
+    document.getElementById('area').value = "";
+}
+        </script>
+    </head>
+    <body>
+        <table border="0" width="100%" height="80px">
+            <tbody><tr><div id="ball">
+                <th> <font face="Tahoma" style="font-size: 35px;" color="#f87d70"> Sensei. </font> </th>
+                <th> <a href="home.htm"><font face="Tahoma" style="font-size: 18px;" color="#46ceda">Home</font> </a> </th>
+                <th><pre><a href="https://suhas-portfolio-weld.vercel.app/about.html"><font face="Tahoma" style="font-size: 18px;" color="#46ceda"> About</font></a></pre></th>
+                <th><pre><a href="https://suhas-portfolio-weld.vercel.app/projects.htm"><font face="Tahoma" style="font-size: 18px;" color="#46ceda">Projects</font></a></pre></th>
+                <th><pre><a href="https://www.linkedin.com/in/suhasghosal/"><font face="Tahoma" style="font-size: 18px"><button>Reach Me</button></font></a></th>
+                </tr></pre>
+        </tbody></div></table>
+        <div id="header">
+            
+            <div id="menubutton"><a id="menulink" href="#">&#9776</a></div>
+            <div id="menu" class="hiddenmenu">
+                <!-- <div class="menuitem"><a id="home" href="#">Home</a></div>
+                <div class="menuitem"><a id="about" href="#">About us</a></div> -->
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="container">
+            <textarea id="area" rows="15" cols="30"></textarea>
+            <div id="controls">
+                <p><a href="javascript:save();" class="button">Save</a>
+                    <a href="javascript:clear();" class="button">Clear</a></p>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <p>Copyright &#169; Sensei. 2023</p>
+        </div>
+    </body>
+</html>
